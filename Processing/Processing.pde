@@ -24,6 +24,14 @@ void setup() {
   //Pick the right PORT!!!
   String portName = Serial.list()[2];
   myPort = new Serial(this, portName, 9600);
+  delay(2000); // wait for Arduino reset (DTR) to complete
+  if (!firstContact) {
+    // Arduino wasn't reset on port open — it's stuck in loop() waiting for 'A'.
+    // Skip the handshake and kick-start the call-response cycle directly.
+    myPort.clear();
+    firstContact = true;
+    myPort.write('A');
+  }
 }
 
 void draw() {

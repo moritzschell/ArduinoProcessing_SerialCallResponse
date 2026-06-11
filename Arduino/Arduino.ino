@@ -25,7 +25,7 @@ void setup() {
 
 void loop() {
   
-  // if we get a valid byte, read analog ins:
+  // if we get a valid byte, read digital ins:
   if (Serial.available() > 0) {
     // get incoming byte:
     inByte = Serial.read();
